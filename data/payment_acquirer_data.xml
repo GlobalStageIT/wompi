@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="payment_acquirer_wompi" model="payment.acquirer">
+            <field name="name">Wompi</field>
+            <field name="display_as">Credit Card (powered by Wompi)</field>
+            <field name="image_128" type="base64" file="payment_wompi/static/src/img/wompi_icon.png"/>
+            <field name="redirect_form_view_id" ref="payment_wompi.redirect_form"/>
+            <field name="module_id" ref="base.module_payment_wompi"/>
+            <field name="description" type="html">
+                <p>
+                    Wompi is a Colombian local payment develop by Bancolombia. It allows merchant to accept local payments (CC, Nequi, PSE) with just one account and integration.
+                </p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><i class="fa fa-check"/>Online Payment</li>
+                    <li class="list-inline-item"><i class="fa fa-check"/>Payment Status Tracking</li>
+                </ul>
+            </field>
+            <!-- https://wompi.co/link-de-pagos/ -->
+            <field name="payment_icon_ids" eval='[(6, 0, [ref("payment.payment_icon_cc_diners_club_intl"),
+                                                            ref("payment.payment_icon_cc_mastercard"),
+                                                            ref("payment.payment_icon_cc_american_express"),
+                                                            ref("payment.payment_icon_cc_visa"),
+                                                            ref("payment.payment_icon_cc_codensa_easy_credit")])]'/>
+            <field name="provider">wompi</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="payment_method_wompi" model="account.payment.method">
+            <field name="name">wompi</field>
+            <field name="code">wompi</field>
+            <field name="payment_type">inbound</field>
+        </record>
+    </data>
+</odoo>
